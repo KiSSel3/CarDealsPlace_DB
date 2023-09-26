@@ -13,7 +13,7 @@ PostgreSQL
 6. Администрирование объявлений
 
 # 3. Сущности
-	User:
+	1. User:
 		id uuid primary key not null
 		login text unique not null
 		password text not null
@@ -22,26 +22,33 @@ PostgreSQL
 		phone_nymber text ~ '+375[0-9]{9}' not null
 		email text  ~ '.@.+..' not null
   
-	UserHistory:
+	2. UserHistory:
 		id uuid primary key not null
 		foreign key user_id references user(id) not null
 		foreign key operation_id references operation(id) not null
 		datetime timestamp not null
+	Связи:
+ 		Связь с таблицей "User" в отношении "Многие к одному" (Many-to-One) через поле ID User.
+   		Связь с таблицей "Operation" в отношении "Многие к одному" (Many-to-One) через поле ID Operation.
+  
 		
-	Operation:
+	3. Operation:
 		id uuid primary key not null
 		type text unique not null
 
-	UserRole:
+	4. UserRole:
 		id uuid primary key not null
 		foreign key user_id references user(id) not null
 		foreign key role_id references role(id) not null
+	Связи:
+ 		Связь с таблицей "User" в отношении "Многие к одному" (Many-to-One) через поле ID User.
+   		Связь с таблицей "Role" в отношении "Многие к одному" (Many-to-One) через поле ID Role.
 
-	Role:
+	5. Role:
 		id uuid primary key not null not null
 		type text unique not null
 
- 	Offer:
+ 	6. Offer:
 		id uuid primary key not null
 		foreign key user_id references user(id) not null
 		foreign key vehicle_id references vehicle(id) not null
@@ -49,8 +56,11 @@ PostgreSQL
 		description text not null
 		price decimal not null
 		location text not null
+	Связи:
+ 		Связь с таблицей "User" в отношении "Многие к одному" (Many-to-One) через поле ID User.
+   		Связь с таблицей "Vihicle" в отношении "Многие к одному" (One-to-One) через поле ID Vihicle.
 
- 	Vehicle:
+ 	7. Vehicle:
 		id uuid primary key not null
 		foreign key producer_id references producer(id) not null
 		foreign key vehicle_type_id references vehicle_type(id) not null
@@ -61,32 +71,40 @@ PostgreSQL
 		engine_displacement decimal not null
 		horsepower int not null
 		production_year date not null
+	Связи:
+ 		Связь с таблицей "Producer" в отношении "Многие к одному" (Many-to-One) через поле ID Producer.
+    		Связь с таблицей "VehicleType" в отношении "Многие к одному" (Many-to-One) через поле ID VehicleType.
+   		Связь с таблицей "WheelDriveType" в отношении "Многие к одному" (Many-to-One) через поле ID WheelDriveType.
+       		Связь с таблицей "TransmissionType" в отношении "Многие к одному" (Many-to-One) через поле ID TransmissionType.
 
-	SuitableWheels:
+	8. SuitableWheels:
 		id uuid primary key not null
 		foreign key wheel_id references wheel(id) not null
 		foreign key vehicle_id references vehicle(id) not null
+	Связи:
+ 		Связь с таблицей "Wheel" в отношении "Многие к одному" (Many-to-One) через поле ID Wheel.
+    		Связь с таблицей "Vehicle" в отношении "Многие к одному" (Many-to-One) через поле ID Vehicle.
 
- 	Wheel:
+ 	9. Wheel:
 		id uuid primary key not null
 		tread_width int not null
 		profile_height int not null
 		radius int not null
 
- 	Producer:
+ 	10. Producer:
 		id uuid primary key not null
 		country text
 		name unique text
 
- 	VehicleType:
+ 	11. VehicleType:
 		id uuid primary key not null
 		type text unique not null
 
- 	WheelDriveType:
+ 	12. WheelDriveType:
 		id uuid primary key not null
 		type text unique not null
 
-	TransmissionType:
+	13. TransmissionType:
 		id uuid primary key not null
 		type text unique not null
  	
