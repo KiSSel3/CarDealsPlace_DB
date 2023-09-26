@@ -56,6 +56,8 @@ PostgreSQL
 		description text not null
 		price decimal not null
 		location text not null
+  		show boolean not null
+    		approved boolean not null
 	Связи:
  		Связь с таблицей "User" в отношении "Многие к одному" (Many-to-One) через поле ID User.
    		Связь с таблицей "Vihicle" в отношении "Многие к одному" (One-to-One) через поле ID Vihicle.
@@ -108,5 +110,18 @@ PostgreSQL
 		id uuid primary key not null
 		type text unique not null
  	
-	
+# 3. Use-case:
+1. Неавторизованный пользователь:
+	1.1 Просматривать список объявлений
+   	1.2 Авторизоваться
+2. Авторизованный пользователь:
+   	2.1 Все, что и неавторизованный пользователь
+   	2.2 Добавить объявление
+   	2.3 Удалить объявление
+   	2.4 Скрыть объявление
+   	2.5 Выйти из аккаунта
+3.Админ:
+   	3.1 Все, что и авторизованный пользователь
+   	3.2 Удалять объявления(чужие)
+   	3.3 Одобрять объявления
  
